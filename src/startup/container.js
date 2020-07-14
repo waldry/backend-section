@@ -13,7 +13,12 @@ const {
 } = require("../services");
 
 //Controllers
-const { HomeController } = require("../controllers");
+const {
+  HomeController,
+  UserController,
+  IdeaController,
+  CommentController,
+} = require("../controllers");
 
 //Routes
 const { HomeRoutes } = require("../routes/index.routes");
@@ -28,6 +33,7 @@ const {
   IdeaRepository,
   CommentRepository,
 } = require("../repositories");
+
 const commentModel = require("../models/comment.model");
 
 const container = createContainer();
@@ -46,6 +52,11 @@ container
   })
   .register({
     HomeController: asClass(HomeController.bind(HomeController)).singleton(),
+    UserController: asClass(UserController.bind(UserController)).singleton(),
+    IdeaController: asClass(IdeaController.bind(IdeaController)).singleton(),
+    CommentController: asClass(
+      CommentController.bind(CommentController)
+    ).singleton(),
   })
   .register({
     HomeRoutes: asFunction(HomeRoutes).singleton(),
@@ -58,7 +69,7 @@ container
   .register({
     UserRepository: asClass(UserRepository).singleton(),
     IdeaRepository: asClass(IdeaRepository).singleton(),
-    CommentRepository: asClass(commentModel).singleton(),
+    CommentRepository: asClass(CommentRepository).singleton(),
   });
 
 module.exports = container;
