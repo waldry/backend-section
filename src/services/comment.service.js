@@ -39,7 +39,7 @@ class CommentService extends BaseService {
       error.message = "idea does not exist";
       throw error;
     }
-    const createComment = await _commentRepository.create(comment);
+    const createdComment = await _commentRepository.create(comment);
     idea.comments.push(createdComment);
     return await _ideaRepository.update(ideaId, { comments: idea.comments });
   }
